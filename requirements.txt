@@ -1,0 +1,3 @@
+pyjags
+numpy
+pandas
