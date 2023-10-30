@@ -1,9 +1,9 @@
 import pyjags
 
-class change_detection():
+class change_detection_model():
 
     def __init__(self, data: dict, samples: int = 1000, chains: int = 1, warm_up_rounds: int = 3000):
-        super(change_detection, self).__init__()
+        super(change_detection_model, self).__init__()
 
         # (1) Ensuring all requisite keys are in data-dictionary
 
