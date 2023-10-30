@@ -2,7 +2,12 @@ import pyjags
 
 class change_detection_model():
 
-    def __init__(self, data: dict, samples: int = 1000, chains: int = 1, warm_up_rounds: int = 3000):
+    def __init__(self,
+                 data: dict,
+                 samples: int = 1000,
+                 chains: int = 1,
+                 warm_up_rounds: int = 3000
+                 ):
         super(change_detection_model, self).__init__()
 
         # (1) Ensuring all requisite keys are in data-dictionary
@@ -63,11 +68,13 @@ class change_detection_model():
                 } 
                 
                 y[j] ~ dnorm(sum(theta[j,]), gamma)
+                y_[j] <- dnorm(sum(theta[j,]), gamma)
             } 
+            
         }
         """
         model = pyjags.Model(script, data=data, chains=chains, adapt=warm_up_rounds, progress_bar=True)
-        return model.sample(samples,vars=['change_point', 'change_rate'])
+        return model.sample(samples, vars=['change_point', 'change_rate', 'y_'])
 
 
     def __null_model(self,data: dict,samples: int = 1000,chains: int=1,warm_up_rounds: int = 3000):
@@ -78,9 +85,11 @@ class change_detection_model():
             
             for (j in 1:n) {
                 y[j] ~ dnorm(change_rate, gamma)
+                y_[j] <- dnorm(change_rate, gamma)
             }
+            
         }
         """
 
         model = pyjags.Model(script, data=data, chains=chains, adapt=warm_up_rounds, progress_bar=True)
-        return model.sample(samples, vars=['change_rate'])
+        return model.sample(samples, vars=['change_rate', 'y_'])
