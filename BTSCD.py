@@ -1,20 +1,29 @@
+import numpy as np
 import pyjags
 
 class change_detection_model():
 
     def __init__(self,
-                 data: dict,
+                 y: np.ndarray,
+                 time: None,
+                 n_cat: int = 1,
                  samples: int = 1000,
                  chains: int = 1,
                  warm_up_rounds: int = 3000
                  ):
         super(change_detection_model, self).__init__()
 
+        data = {
+            'y': y,
+            'time': time,
+            'n_cat': n_cat
+        }
+
         # (1) Ensuring all requisite keys are in data-dictionary
 
         ## (1.1) removing any unused keys
         for k in list(data.keys()):
-            if k not in ['y', 'time', 'n_cat']:
+            if data[k] == None:
                 del data[k]
 
         ## (1.2) ensuring that the length of the data is included
@@ -77,7 +86,7 @@ class change_detection_model():
         return model.sample(samples, vars=['change_point', 'change_rate', 'y_'])
 
 
-    def __null_model(self,data: dict,samples: int = 1000,chains: int=1,warm_up_rounds: int = 3000):
+    def __null_model(self, data: dict,samples: int = 1000,chains: int=1,warm_up_rounds: int = 3000):
         script = """
         model{
             gamma ~ dgamma(.001,.001)
