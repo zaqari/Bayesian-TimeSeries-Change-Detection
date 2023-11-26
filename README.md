@@ -21,13 +21,11 @@ Once the package has been installed, you can easily belt out models via the foll
 ```
 from BayesianChangeDetection import cdm
 
-data = {
-    'y': the_measured_values_for_your_problem,
-    'time': time_for_each_measurement,
-    'n_cat': <optional> number_of_expected_signal_changes   
-}
-
-model = cdm(data)
+model = cdm(
+    y = the_measured_values_for_your_problem
+    time = time_for_each_measurement_or_else_none
+    n_cat = optional_value_for_number_of_expected_time_changes
+)
 ```
 
 And you can pull the results for your model using
