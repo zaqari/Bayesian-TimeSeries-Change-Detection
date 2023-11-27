@@ -1,4 +1,4 @@
-from .BTCSD import change_detection_model as cdm
+from .BTSCD import change_detection_model as cdm
 
 NOTICE = """
 ATTENTION: when using the model, it expects an input as a dictionary containing data following one of the structures described below:
