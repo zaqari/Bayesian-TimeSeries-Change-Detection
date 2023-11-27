@@ -1,7 +1,4 @@
-import numpy as np
-import pyjags
-
-class change_detection_model():
+class cdm():
 
     def __init__(self,
                  y: np.ndarray,
@@ -11,7 +8,7 @@ class change_detection_model():
                  chains: int = 1,
                  warm_up_rounds: int = 3000
                  ):
-        super(change_detection_model, self).__init__()
+        super(cdm, self).__init__()
 
         data = {
             'y': y,
@@ -75,9 +72,9 @@ class change_detection_model():
                 for (i in 1:n_cat){
                     theta[j,i] <- ifelse(time[j] >= change_point[i], change_rate[i], 0)
                 } 
-                
-                y[j] ~ dnorm(sum(theta[j,]), gamma)
-                y_[j] <- dnorm(sum(theta[j,]), gamma)
+                mu[j] <- sum(theta[j,])
+                y[j] ~ dnorm(mu[j], gamma)
+                y_[j] ~ dnorm(mu[j], gamma)
             } 
             
         }
