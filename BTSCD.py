@@ -1,4 +1,4 @@
-class cdm():
+class change_detection_model():
 
     def __init__(self,
                  y: np.ndarray,
@@ -8,7 +8,7 @@ class cdm():
                  chains: int = 1,
                  warm_up_rounds: int = 3000
                  ):
-        super(cdm, self).__init__()
+        super(change_detection_model, self).__init__()
 
         data = {
             'y': y,
