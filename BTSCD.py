@@ -23,7 +23,7 @@ class change_detection_model():
 
         ## (1.1) removing any unused keys
         for k in list(data.keys()):
-            if data[k] == None:
+            if data[k] is None:
                 del data[k]
 
         ## (1.2) ensuring that the length of the data is included
