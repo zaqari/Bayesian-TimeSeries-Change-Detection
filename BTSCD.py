@@ -1,3 +1,6 @@
+import numpy as np
+import pyjags
+
 class change_detection_model():
 
     def __init__(self,
