@@ -1,4 +1,4 @@
-from .JAGS_model import change_detection as cdm
+from .BTCSD import change_detection as cdm
 
 NOTICE = """
 ATTENTION: when using the model, it expects an input as a dictionary containing data following one of the structures described below:
